@@ -32,6 +32,12 @@ int main (int argc, char **argv)
 
     MpiManager::GetInstance()->Initialize(&argc, &argv);
 
+    if (MpiManager::GetInstance()->IsMaster())
+    {
+        printf("Parallel: %s\n", MpiManager::GetInstance()->IsParallel() ? "True" : "False");
+        printf("NumberOfProcesses: %d\n", MpiManager::GetInstance()->GetNumberOfProcesses());
+    }
+
     // Idea taken from http://www.open-mpi.org/faq/?category=debugging#serial-debuggers
     // Once you attach with a debugger, go up the function stack until you are in this block of code (you'll likely attach during the sleep())
     // then set the variable i to a nonzero value. With GDB, the syntax is:
